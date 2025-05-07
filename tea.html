@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کافه ستاره - دمنوش</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+            background-color: #e0f2e9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2e8b57;
+        }
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .category-item {
+            width: 45%; /* افزایش سایز در موبایل */
+            margin: 10px;
+            padding: 15px;
+            border: 2px solid #a5d6a7;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: #f1f8e9;
+            box-shadow: 3px 3px 5px #c8e6c9;
+            text-align: center;
+        }
+        .category-item h3 {
+            color: #2e8b57;
+            margin-bottom: 5px;
+        }
+        .category-item .price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Media Query برای دستگاه‌های موبایل */
+        @media (max-width: 768px) {
+            .category-container {
+                flex-direction: column; /* تغییر به ستونی در موبایل */
+                align-items: center; /* وسط چین کردن آیتم‌ها */
+            }
+            .category-item {
+                width: 90%; /* اشغال کردن فضای بیشتر در موبایل */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>دمنوش</h1>
+    <div class="category-container">
+        <div class="category-item">
+            <h3>انرژی زا</h3>
+            <p class="price">55,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>ویژه</h3>
+            <p class="price">70,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>کرن بری</h3>
+            <p class="price">55,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>سیب و عسل</h3>
+            <p class="price">55,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>آرامش بخش</h3>
+            <p class="price">55,000 تومان</p>
+        </div>
+    </div>
+</body>
+</html>

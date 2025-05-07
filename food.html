@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کافه ستاره - غذا</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+            background-color: #e0f2e9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2e8b57;
+        }
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .category-item {
+            width: 45%; /* Adjusted width for better spacing on smaller screens */
+            margin: 10px;
+            padding: 15px;
+            border: 2px solid #a5d6a7;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: #f1f8e9;
+            box-shadow: 3px 3px 5px #c8e6c9;
+            text-align: center;
+        }
+        .category-item h3 {
+            color: #2e8b57;
+            margin-bottom: 5px;
+        }
+        .category-item .price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Media Query for Mobile Devices */
+        @media (max-width: 768px) {
+            .category-container {
+                flex-direction: column; /* Stack items vertically */
+                align-items: center; /* Center items horizontally */
+            }
+            .category-item {
+                width: 90%; /* Take up more screen width on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>غذا</h1>
+    <div class="category-container">
+        <div class="category-item">
+            <h3>سیب مخصوص</h3>
+            <p class="price">145,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>سیب ساده</h3>
+            <p class="price">100,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>پاستا</h3>
+            <p class="price">240,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>هات داگ سوخاری</h3>
+            <p class="price">ناموجود</p>
+            <h2>---------------------------------------</h2>
+            <h3>چیپس و پنیر</h3>
+            <p class="price">ناموجود</p>
+            <h2>---------------------------------------</h2>
+            <h3>اسنک</h3>
+            <p class="price">80,000 تومان</p>
+            <h2>---------------------------------------</h2>
+            <h3>پیتزا مخلوط</h3>
+            <p class="price">ناموجود</p>
+            <h2>---------------------------------------</h2>
+            <h3>پیتزا چیکن</h3>
+            <p class="price">ناموجود</p>
+            <h2>---------------------------------------</h2>
+            <h3>همبرگر</h3>
+            <p class="price">ناموجود</p>
+        </div>
+    </div>
+</body>
+</html>
