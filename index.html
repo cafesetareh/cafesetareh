@@ -4,219 +4,814 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کافه ستاره - منو</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        a {
-            text-decoration: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: Tahoma, sans-serif;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
             direction: rtl;
-            background-color: #e0f2e9;
-            color: #333;
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cdefs%3E%3Cpattern id="stars" width="20" height="20" patternUnits="userSpaceOnUse"%3E%3Ccircle cx="10" cy="10" r="1" fill="%238fbc8f" /%3E%3C/pattern%3E%3C/defs%3E%3Crect width="100" height="100" fill="url(%23stars)" /%3E%3C/svg%3E');
+            background-color: #1a1a2e;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .textbox-2 {
-            text-align: center;
-            padding: 15px;
-            border: 2px dashed #27ae60;
-            background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
         }
 
-        .textbox-2:focus {
-            outline: none;
-            border-color: #f39c12;
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+        }
+
+        .star-small {
+            width: 1px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 2px #fff;
+        }
+
+        .star-medium {
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 3px #fff;
+        }
+
+        .star-large {
+            width: 3px;
+            height: 3px;
+            background: #ffffff;
+            box-shadow: 0 0 4px #fff;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 50px;
+            padding-left: 50px;
+            min-height: 150px;
+        }
+
+        .logo-container {
+            position: absolute;
+            right: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cafe-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
+
+        .star-circle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkleGroup 2s infinite;
+            box-shadow: 0 0 3px #fff;
+        }
+
+        .title-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            height: 120px;
         }
 
         h1 {
             text-align: center;
-            color: #175d36;
-            margin-bottom: 30px;
+            color: #ffffff;
+            margin: 0;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px #c8e6c9;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
         }
 
         .menu-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .menu-item {
-            display: inline-block;
-            width: 30%;
-            margin: 10px;
-            padding: 15px;
-            border: 2px solid #a5d6a7;
-            border-radius: 10px;
-            vertical-align: top;
-            box-sizing: border-box;
-            background-color: #f1f8e9;
-            box-shadow: 3px 3px 5px #c8e6c9;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-item-image {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto 0;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .menu-item img {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-item:hover .menu-item-image {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.2);
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .menu-item:hover::before {
+            opacity: 0.1;
         }
 
         .menu-item h2 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
             text-align: center;
-            color: #2e8b57;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #a5d6a7;
-            padding-bottom: 5px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
-        .category-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+        .footer {
+            margin-top: 4rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            padding: 3rem 0;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
         }
 
-        .category-item {
-            width: 30%;
-            margin: 10px;
-            padding: 15px;
-            border: 2px solid #a5d6a7;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-address {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            box-sizing: border-box;
-            background-color: #f1f8e9;
-            box-shadow: 3px 3px 5px #c8e6c9;
-            text-align: center;
-        }
-
-        .category-item h3 {
-            color: #2e8b57;
-            margin-bottom: 5px;
-        }
-
-        .category-item .price {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .footer-box {
-            display: flex;
-            justify-content: space-around;
-            background-color: #babcba;
-            padding: 20px;
-        }
-
-        .footer-instagram {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .footer-instagram span {
-            color: #9f0b0b;
             display: inline-block;
-            font-size: 16px;
-            vertical-align: middle;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Media Query for Mobile Devices */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: shootingStar 3s linear infinite;
+            opacity: 0;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 100%;
+            width: 20px;
+            height: 1px;
+            background: linear-gradient(to left, rgba(255,255,255,0.8), transparent);
+        }
+
+        @keyframes shootingStar {
+            0% {
+                opacity: 0;
+                right: -10%;
+                top: 100%;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0;
+            }
+            100% {
+                right: 110%;
+                top: -10%;
+                opacity: 0;
+            }
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
         @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                min-height: 120px;
+            }
+
+            .title-container {
+                width: calc(100% - 100px);
+                max-width: 400px;
+                height: 100px;
+                margin: 0;
+            }
+
+            .logo-container {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .cafe-logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                padding: 0 10px;
+            }
+
             .menu-container {
-                flex-direction: column;
-                align-items: center;
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
             }
 
             .menu-item {
-                width: 90%;
-                margin: 10px 0;
+                margin-bottom: 1.5rem;
             }
 
-            .footer-box {
-                flex-direction: column;
-                align-items: center;
+            .menu-item-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                min-height: 100px;
+            }
+
+            .title-container {
+                width: calc(100% - 80px);
+                height: 80px;
+            }
+
+            .logo-container {
+                right: 10px;
+            }
+
+            .cafe-logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        @keyframes twinkleGroup {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.2; transform: scale(0.8); }
+        }
+
+        .background-star {
+            position: absolute;
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        .page-transition {
+            animation: pageTransition 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .menu-item:hover .menu-link {
+            color: inherit;
+        }
+
+        .page-shooting-star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .page-shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 100%;
+            height: 1px;
+            background: linear-gradient(to left, rgba(255,255,255,0.8), transparent);
+        }
+
+        .page-shooting-star.fast {
+            width: 3px;
+            height: 3px;
+        }
+
+        .page-shooting-star.fast::before {
+            width: 50px;
+        }
+
+        .page-shooting-star.medium {
+            width: 2px;
+            height: 2px;
+        }
+
+        .page-shooting-star.medium::before {
+            width: 35px;
+        }
+
+        .page-shooting-star.slow {
+            width: 1px;
+            height: 1px;
+        }
+
+        .page-shooting-star.slow::before {
+            width: 20px;
+        }
+
+        @keyframes pageShootingStar {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+            5% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--travel-x), var(--travel-y));
             }
         }
     </style>
 </head>
 <body>
-    <h1 class="textbox-2">کافه ستاره</h1>
+    <div class="stars-container" id="starsContainer"></div>
+
+    <header class="header">
+        <div class="title-container">
+            <h1>کافه ستاره</h1>
+        </div>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="کافه ستاره" class="cafe-logo">
+        </div>
+    </header>
 
     <div class="menu-container">
         <div class="menu-item">
-            <a href="coffee.html" target="_blank">
-                <img src="./cafe.jpg" alt="قهوه">
-                <h2>قهوه</h2>
+            <a href="coffee.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="cafe.jpg" alt="قهوه">
+                </div>
+                <div class="menu-item-content">
+                    <h2>قهوه</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="cold-drinks.html" target="_blank">
-                <img src="./a.jpg" alt="نوشیدنی خنک">
-                <h2>نوشیدنی خنک</h2>
+            <a href="cold-drinks.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="a.jpg" alt="نوشیدنی خنک">
+                </div>
+                <div class="menu-item-content">
+                    <h2>نوشیدنی خنک</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="elixir.html" target="_blank">
-                <img src="./b.jpg" alt="معجون">
-                <h2>دسر</h2>
+            <a href="elixir.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="b.jpg" alt="معجون">
+                </div>
+                <div class="menu-item-content">
+                    <h2>دسر</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="hot-drinks.html" target="_blank">
-                <img src="./c.jpg" alt="نوشیدنی گرم">
-                <h2>نوشیدنی گرم</h2>
+            <a href="hot-drinks.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="c.jpg" alt="نوشیدنی گرم">
+                </div>
+                <div class="menu-item-content">
+                    <h2>نوشیدنی گرم</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="food.html" target="_blank">
-                <img src="./d.jpg" alt="غذا">
-                <h2>غذا</h2>
+            <a href="food.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="d.jpg" alt="غذا">
+                </div>
+                <div class="menu-item-content">
+                    <h2>غذا</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="tea.html" target="_blank">
-                <img src="./e.jpg" alt="دم نوش">
-                <h2>دم نوش</h2>
+            <a href="tea.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="e.jpg" alt="دم نوش">
+                </div>
+                <div class="menu-item-content">
+                    <h2>دم نوش</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="hookah.html" target="_blank">
-                <img src="./f.jpg" alt="قلیان">
-                <h2>قلیان</h2>
+            <a href="hookah.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="f.jpg" alt="قلیان">
+                </div>
+                <div class="menu-item-content">
+                    <h2>قلیان</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="milkshake.html" target="_blank">
-                <img src="./g.jpg" alt="میلک شیک">
-                <h2>میلک شیک</h2>
+            <a href="milkshake.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="g.jpg" alt="میلک شیک">
+                </div>
+                <div class="menu-item-content">
+                    <h2>میلک شیک</h2>
+                </div>
             </a>
         </div>
 
         <div class="menu-item">
-            <a href="glace.html" target="_blank">
-                <img src="./z.jpg" alt="گلاسه">
-                <h2>گلاسه</h2>
+            <a href="glace.html" class="menu-link" target="_blank">
+                <div class="menu-item-image">
+                    <img src="z.jpg" alt="گلاسه">
+                </div>
+                <div class="menu-item-content">
+                    <h2>گلاسه</h2>
+                </div>
             </a>
         </div>
     </div>
-    <footer>
-        <p class="footer-box">آدرس: گرمسار کیلومتر یک جاده بنه کوه باشگاه سوارکاری شباهنگ کافه ستاره</p>
-        <div class="footer-instagram">
-            <a href="https://www.instagram.com/cafe_setareh__" target="_blank" rel="noopener noreferrer">
-                <span>پیج اینستاگرام ما را دنبال کنید</span>
-            </a>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-address">
+                <p>آدرس: گرمسار کیلومتر یک جاده بنه کوه باشگاه سوارکاری شباهنگ کافه ستاره</p>
+                <div class="shooting-star"></div>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/__cafe_setareh" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    ما را در اینستاگرام دنبال کنید
+                </a>
+            </div>
         </div>
     </footer>
 
+    <script>
+        function createStarRectangle() {
+            createStarsForContainer('.title-container', 'star-circle', 8, 4);
+        }
+
+        function createStarsForContainer(containerSelector, starClass, topStars, sideStars) {
+            const container = document.querySelector(containerSelector);
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            
+            const margin = 10;
+            const rectWidth = width - margin * 2;
+            const rectHeight = height - margin * 2;
+            
+            for (let i = 0; i < topStars; i++) {
+                createStar(margin + (rectWidth / (topStars - 1)) * i, margin, i, container, starClass);
+                createStar(margin + (rectWidth / (topStars - 1)) * i, height - margin, i + topStars, container, starClass);
+            }
+            
+            for (let i = 1; i < sideStars - 1; i++) {
+                createStar(margin, margin + (rectHeight / (sideStars - 1)) * i, i + topStars * 2, container, starClass);
+                createStar(width - margin, margin + (rectHeight / (sideStars - 1)) * i, i + topStars * 2 + sideStars, container, starClass);
+            }
+        }
+        
+        function createStar(x, y, index, container, className) {
+            const star = document.createElement('div');
+            star.className = className;
+            star.style.left = `${x}px`;
+            star.style.top = `${y}px`;
+            star.style.animationDelay = `${(index * 0.1)}s`;
+            container.appendChild(star);
+        }
+
+        function createBackgroundStar() {
+            const star = document.createElement('div');
+            const size = Math.floor(Math.random() * 3);
+            star.className = 'background-star ' + (
+                size === 0 ? 'star-small' : 
+                size === 1 ? 'star-medium' : 
+                'star-large'
+            );
+            
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            
+            const duration = 3 + Math.random() * 4;
+            star.style.animation = `twinkle ${duration}s infinite`;
+            star.style.animationDelay = Math.random() * duration + 's';
+            
+            return star;
+        }
+
+        function updateStarPosition(star) {
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+        }
+
+        function initBackgroundStars() {
+            const container = document.getElementById('starsContainer');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = createBackgroundStar();
+                container.appendChild(star);
+
+                star.addEventListener('animationiteration', () => {
+                    updateStarPosition(star);
+                });
+            }
+        }
+
+        function createPageShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'page-shooting-star';
+            
+            const speeds = ['fast', 'medium', 'slow'];
+            const speedClass = speeds[Math.floor(Math.random() * speeds.length)];
+            star.classList.add(speedClass);
+            
+            let duration;
+            switch(speedClass) {
+                case 'fast':
+                    duration = 1 + Math.random() * 1;
+                    break;
+                case 'medium':
+                    duration = 2 + Math.random() * 2; 
+                    break;
+                case 'slow':
+                    duration = 4 + Math.random() * 3; 
+                    break;
+            }
+
+            const startSide = Math.floor(Math.random() * 4);
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+
+            switch(startSide) {
+                case 0: 
+                    star.style.top = '0%';
+                    star.style.left = startX + '%';
+                    break;
+                case 1:
+                    star.style.top = startY + '%';
+                    star.style.right = '0%';
+                    break;
+                case 2: 
+                    star.style.bottom = '0%';
+                    star.style.left = startX + '%';
+                    break;
+                case 3:
+                    star.style.top = startY + '%';
+                    star.style.left = '0%';
+                    break;
+            }
+
+            let angleRange;
+            switch(speedClass) {
+                case 'fast':
+                    angleRange = 20; 
+                    break;
+                case 'medium':
+                    angleRange = 35;
+                    break;
+                case 'slow':
+                    angleRange = 50; 
+                    break;
+            }
+
+            const angle = (Math.random() * angleRange - angleRange/2) * (Math.PI / 180);
+            const distance = 100 + Math.random() * 100;
+            const travelX = Math.cos(angle) * distance;
+            const travelY = Math.sin(angle) * distance;
+
+            star.style.setProperty('--travel-x', `${travelX}vh`);
+            star.style.setProperty('--travel-y', `${travelY}vh`);
+            star.style.animation = `pageShootingStar ${duration}s linear forwards`;
+
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.remove();
+            }, duration * 1000);
+        }
+
+        function initPageShootingStars() {
+            for(let i = 0; i < 10; i++) {
+                const minDelay = 1000;
+                const maxDelay = 12000;
+                setInterval(() => {
+                    createPageShootingStar();
+                }, minDelay + Math.random() * (maxDelay - minDelay));
+            }
+            createPageShootingStar();
+        }
+
+        window.addEventListener('load', () => {
+            createStarRectangle();
+            initBackgroundStars();
+            createNewShootingStar();
+            initPageShootingStars();
+        });
+
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const menuItem = this.closest('.menu-item');
+                
+                menuItem.style.transform = 'scale(0.95)';
+                
+                const flash = document.createElement('div');
+                flash.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: white;
+                    z-index: 9999;
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
+                `;
+                document.body.appendChild(flash);
+                
+                requestAnimationFrame(() => {
+                    flash.style.opacity = '0.5';
+                    setTimeout(() => {
+                        flash.style.opacity = '0';
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 300);
+                    }, 100);
+                });
+            });
+        });
+
+        function createNewShootingStar() {
+            const footerAddress = document.querySelector('.footer-address');
+            const oldStar = footerAddress.querySelector('.shooting-star');
+            if (oldStar) {
+                oldStar.remove();
+            }
+
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            const angle = Math.random() * 30 - 15;
+            star.style.transform = `rotate(${angle}deg)`;
+            
+            footerAddress.appendChild(star);
+
+            setTimeout(createNewShootingStar, 3000);
+        }
+    </script>
 </body>
 </html>
